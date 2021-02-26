@@ -19,7 +19,7 @@ var (
 	size        int64
 	hexdump     bool
 	memorymap   bool
-	quiet       bool
+	banner      bool
 	pid         string
 	permission  string
 	outputPath  string
@@ -29,7 +29,7 @@ var rootCmd = &cobra.Command{
 	Use:   "dumproid",
 	Short: "Android memory dump tool without ndk",
 	Run: func(cmd *cobra.Command, args []string) {
-		if !quiet {
+		if banner {
 			asciiArt()
 		}
 
@@ -63,7 +63,7 @@ func init() {
 	rootCmd.Flags().Int64VarP(&size, "number", "n", 0x100, "number of bytes")
 	rootCmd.Flags().BoolVarP(&memorymap, "maps", "m", false, "output memory mapping")
 	rootCmd.Flags().BoolVarP(&hexdump, "dump", "d", false, "output hexdump memory")
-	rootCmd.Flags().BoolVarP(&quiet, "quiet", "q", false, "Do not print messages")
+	rootCmd.Flags().BoolVarP(&banner, "banner", "b", false, "print banner")
 	rootCmd.Flags().StringVarP(&outputPath, "output", "o", "/data/local/tmp", "output path")
 	rootCmd.Flags().StringVarP(&permission, "filter", "f", "", "")
 	rootCmd.Flags().StringVarP(&pid, "pid", "p", "", "target app's pid")
